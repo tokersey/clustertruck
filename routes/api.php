@@ -24,3 +24,8 @@ Route::post('/kitchens/getDriveTimeByDirections', function(Request $request) {
     $kitchenController = new KitchenController();
     return $kitchenController->getDriveTimeByDirections($request);
 });
+
+Route::post('/kitchens/getDriveTimeByDistanceMatrix', function(Request $request) {
+    $kitchenController = new KitchenController();
+    return $kitchenController->getDriveTimeByDistanceMatrix($request);
+});

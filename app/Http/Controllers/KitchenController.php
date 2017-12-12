@@ -21,10 +21,10 @@ class KitchenController extends Controller
 
         $closestLocation = [];
         foreach($kitchens as $kitchen){
-            $gmaps = env("GOOGLE_MAPS_DIRECTIONS_URL") . "?origin=" . $request->address . "&destination=" . $kitchen['address'] . "&key=" . env("GOOGLE_MAPS_API_KEY");
+            $directionsUrl = env("GOOGLE_MAPS_DIRECTIONS_URL") . "?origin=" . $request->address . "&destination=" . $kitchen['address'] . "&key=" . env("GOOGLE_MAPS_API_KEY");
 
-            $grequest = $client->request('GET', str_replace(' ', '+', $gmaps));
-            $json = json_decode($grequest->getBody());
+            $direction_request = $client->request('GET', str_replace(' ', '+', $directionsUrl));
+            $json = json_decode($direction_request->getBody());
 
             if(!isset($closestLocation['driveTime']) || $json->routes[0]->legs[0]->duration->value < $closestLocation['minutes']){
                 $closestLocation['address'] = $json->routes[0]->legs[0]->end_address;
@@ -42,15 +42,15 @@ class KitchenController extends Controller
         $kitchens = $this->getKitchens();
         $client = new Client();
 
-        $destination_addresses = "";
+        $destinationAddresses = "";
         foreach($kitchens as $kitchen){
-            $destination_addresses = $destination_addresses . "|" . str_replace(' ', '+', $kitchen['address']);
+            $destinationAddresses = $destinationAddresses . "|" . str_replace(' ', '+', $kitchen['address']);
         }
 
-        $gmaps = env("GOOGLE_MAPS_DISTANCE_URL") . "?origins=" . $request->address . "&destinations=" . $destination_addresses . "&key=" . env("GOOGLE_MAPS_API_KEY");
+        $distanceUrl = env("GOOGLE_MAPS_DISTANCE_URL") . "?origins=" . $request->address . "&destinations=" . $destinationAddresses . "&key=" . env("GOOGLE_MAPS_API_KEY");
 
-        $grequest = $client->request('GET', str_replace(' ', '+', $gmaps));
-        $json = json_decode($grequest->getBody());
+        $distanceRequest = $client->request('GET', str_replace(' ', '+', $distanceUrl));
+        $json = json_decode($distanceRequest->getBody());
 
         $closestLocation = [];
         foreach($json->rows[0]->elements as $key => $kitchen){

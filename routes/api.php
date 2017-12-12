@@ -20,12 +20,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/kitchens', 'KitchenController@getKitchens');
 
-Route::post('/kitchens/getDriveTimeByDirections', function(Request $request) {
+Route::post('/kitchens/driveTimeByDirections', function(Request $request) {
     $kitchenController = new KitchenController();
     return $kitchenController->getDriveTimeByDirections($request);
 });
 
-Route::post('/kitchens/getDriveTimeByDistanceMatrix', function(Request $request) {
+Route::post('/kitchens/driveTimeByDistanceMatrix', function(Request $request) {
     $kitchenController = new KitchenController();
     return $kitchenController->getDriveTimeByDistanceMatrix($request);
 });

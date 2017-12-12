@@ -8,7 +8,7 @@ There are 3 routes available.
 
 GET route which returns the list of kitchen addresses.
 
-**Drive Time Using the Directions API - /api/kitchens/getDriveTimeByDirections**
+**Drive Time Using the Directions API - /api/kitchens/driveTimeByDirections**
 
 POST route that provides the closest location drive time. This route makes a multiple requests to the Directions API.
 
@@ -20,7 +20,7 @@ This route expects a POST JSON body.
 }
 ```
 
-**Drive Time Using the Distance Matrix API - /api/kitchens/getDriveTimeByDistanceMatrix**
+**Drive Time Using the Distance Matrix API - /api/kitchens/driveTimeByDistanceMatrix**
 
 POST route that provides the closest location drive time. This route makes a single request to the Distance Matrix API.
 

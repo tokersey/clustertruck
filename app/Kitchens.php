@@ -15,7 +15,7 @@ class Kitchens extends Model
         $kitchenList = [];
         foreach(json_decode($request->getBody()) as $kitchen){
             $kitchenList[$kitchen->slug]['name']    = $kitchen->name;
-            $kitchenList[$kitchen->slug]['address'] = $kitchen->address_1 . "+" . $kitchen->city . "+" . $kitchen->state . "+" . $kitchen->zip_code;
+            $kitchenList[$kitchen->slug]['address'] = $kitchen->address_1 . " " . $kitchen->city . " " . $kitchen->state . " " . $kitchen->zip_code;
         }
 
         return $kitchenList;
